@@ -6,6 +6,7 @@ const LoginToken = () => {
 
   const handleToken = () => {
     window.localStorage.setItem("token", token);
+    window.localStorage.setItem("isLoggedIn",true);
   }
 
   return (

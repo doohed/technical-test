@@ -19,7 +19,8 @@ const Login = () => {
         {
           headers: {
             'accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-cors-api-key': "temp_1230e9794f355da55356695ea15c209e",
           }
         }
       );
@@ -48,8 +49,8 @@ const Login = () => {
       />
       <button onClick={handleLogin}>Login</button>
       </div>
-     </>
-      );
+    </>
+  );
 };
 
 export default Login;
