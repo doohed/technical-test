@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { setToken, clearToken } from '../redux/tokenSlice.js';
 
 const proxyUrl = 'https://cors.bridged.cc/';
 
@@ -25,17 +23,17 @@ const Login = () => {
           }
         }
       );
-      console.log('Login successful:', response.data);
       console.log(response.data.access_token);
-      dispatch(setToken(response.data.access_token));
-      console.log(useSelector(state => state.token));
+      window.localStorage.setItem("token", response.data.access_token);
+      window.localStorage.setItem("isLoggedIn",true);
+      
     } catch (error) {
       console.error('Error during login:', error);
     }
   };
-
   return (
-    <div>
+    <>
+      <div>
       <input
         type="text"
         placeholder="Username"
@@ -49,8 +47,9 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
-    </div>
-  );
+      </div>
+     </>
+      );
 };
 
 export default Login;
