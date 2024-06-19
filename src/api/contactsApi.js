@@ -29,10 +29,8 @@ export const getContact = async (TOKEN, id) => {
 };
 
 export const updateContact = async (id, contactData, token) => {
-  try {
     const response = await axios.patch(
-      proxyUrl + `${API_URL}/contacts/${id}`,
-      contactData,
+      proxyUrl + `${API_URL}/contacts/${id}`,contactData,
       {
         headers: {
           'accept': 'application/json',
@@ -43,7 +41,19 @@ export const updateContact = async (id, contactData, token) => {
       }
     );
     return response.data;
-  } catch (error) {
-    throw new Error(`Failed to update contact: ${error.message}`);
-  }
+};
+
+export const createContact = async (data, token) => {
+  const response = await axios.post(
+    proxyUrl + `${API_URL}/contacts`, data,
+    {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'x-cors-api-key': xcorsKey,
+      }
+    }
+  );
+  return response.data;
 };
