@@ -20,7 +20,11 @@ const columns = [
         >
           Edit
         </Button>
-        <Button variant="contained" color="error">
+        <Button 
+          variant="contained" 
+          color="error"
+          onClick={() => params.row.handleDelete(params.row.id)}
+        >
           Delete
         </Button>
       </Stack>
@@ -35,16 +39,22 @@ const ContactDetails = ({ contacts }) => {
     navigate(`/contact/edit/${id}`);
   };
 
+  const handleDelete = (id) => {
+    const token = window.localStorage.getItem("token");
+    
+  }
+
   const rows = contacts.map((contact) => ({
     id: contact.id,
     name: contact.name,
     lastName: contact.lastName,
     email: contact.email,
     handleEdit: handleEdit, // Pass handleEdit function to each row
+    handleDelete: handleDelete,
   }));
 
   return (
-    <div style={{ height: '70vh', width: '100%' }}>
+    <div style={{ height: '70vh', width: '80vw' }}>
       <DataGrid
         rows={rows}
         columns={columns}

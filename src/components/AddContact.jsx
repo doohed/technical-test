@@ -11,7 +11,7 @@ const AddContact = () => {
     navigate('/contact/create');
   }
   return (
-    <div className="text-right mt-5">
+    <div className="text-left mt-5">
       <Fab color="primary" aria-label="add" onClick={handleClick}>
         <AddIcon />
       </Fab>

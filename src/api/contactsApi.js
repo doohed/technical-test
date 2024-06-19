@@ -57,3 +57,15 @@ export const createContact = async (data, token) => {
   );
   return response.data;
 };
+
+export const deleteContact = async (TOKEN, id) => {
+  const response = await axios.delete(proxyUrl + `${API_URL}/contacts/${id}`, {
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${TOKEN}`,
+      'x-cors-api-key': xcorsKey,
+    }
+  });
+  return response.data;
+};

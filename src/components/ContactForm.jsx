@@ -1,12 +1,24 @@
-import React from "react";
+
+import React from 'react';
 import {
   Button,
   Typography,
   Box,
-  TextField,
+  TextField
 } from "@mui/material";
 
-const ContactForm = ({ formData, formErrors, handleFormChange, handleAddressChange, handlePhoneChange, handleSubmit }) => {
+const ContactForm = ({
+  formData,
+  formErrors,
+  handleFormChange,
+  handleAddressChange,
+  handlePhoneChange,
+  handleSubmit,
+  addAddress,
+  removeLastAddress,
+  addPhone,
+  removeLastPhone
+}) => {
   return (
     <Box
       component="form"
@@ -136,6 +148,12 @@ const ContactForm = ({ formData, formErrors, handleFormChange, handleAddressChan
           />
         </Box>
       ))}
+      <Button onClick={addAddress} variant="outlined" color="primary">
+        Add Address
+      </Button>
+      <Button onClick={removeLastAddress} variant="outlined" color="secondary">
+        Remove Last Address
+      </Button>
       <Typography variant="h6" gutterBottom>
         Phones
       </Typography>
@@ -163,7 +181,14 @@ const ContactForm = ({ formData, formErrors, handleFormChange, handleAddressChan
           />
         </Box>
       ))}
-      <Button type="submit" variant="contained" color="primary">
+      <Button onClick={addPhone} variant="outlined" color="primary" className="mr-2">
+        Add Phone
+      </Button>
+      <Button onClick={removeLastPhone} variant="outlined" color="secondary">
+        Remove Last Phone
+      </Button>
+      <br/>
+      <Button type="submit" variant="contained" color="primary" className="mt-2">
         Save
       </Button>
     </Box>

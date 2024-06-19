@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getContact, updateContact } from '../api/contactsApi.js';
 import { Toaster, toast } from 'sonner';
-import { CircularProgress, Alert, Typography } from "@mui/material";
-import ContactForm from '../components/ContactForm.jsx';
+import { Typography, Alert, CircularProgress } from "@mui/material";
+import ContactForm from '../components/ContactForm';
+import Navbar from '../components/Navbar.jsx';
 
 const EditContactPage = () => {
   const params = useParams();
@@ -72,6 +73,46 @@ const EditContactPage = () => {
     }));
   };
 
+  const addAddress = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      addresses: [...prevState.addresses, {
+        street: '',
+        number: '',
+        suburb: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        country: '',
+        type: ''
+      }]
+    }));
+  };
+
+  const removeLastAddress = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      addresses: prevState.addresses.slice(0, -1)
+    }));
+  };
+
+  const addPhone = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      phones: [...prevState.phones, {
+        phoneNumber: '',
+        type: ''
+      }]
+    }));
+  };
+
+  const removeLastPhone = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      phones: prevState.phones.slice(0, -1)
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let errors = {};
@@ -100,8 +141,8 @@ const EditContactPage = () => {
         }
       }
     });
-    setFormErrors(errors);
 
+    setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
       const postData = {
@@ -112,11 +153,11 @@ const EditContactPage = () => {
         phones: formData.phones
       };
       postData.addresses = postData.addresses.map(address => {
-        const { id, ...rest } = address;
+          const { id, ...rest } = address;
         return rest;
       });
       postData.phones = postData.phones.map(phone => {
-        const { id, ...rest } = phone;
+          const { id, ...rest } = phone;
         return rest;
       });
 
@@ -145,8 +186,9 @@ const EditContactPage = () => {
 
   return (
     <div>
+      <Navbar/>
       <Typography variant="h4" gutterBottom>
-        Contact Info
+        Edit Contact
       </Typography>
       <ContactForm
         formData={formData}
@@ -155,8 +197,12 @@ const EditContactPage = () => {
         handleAddressChange={handleAddressChange}
         handlePhoneChange={handlePhoneChange}
         handleSubmit={handleSubmit}
+        addAddress={addAddress}
+        removeLastAddress={removeLastAddress}
+        addPhone={addPhone}
+        removeLastPhone={removeLastPhone}
       />
-      <Toaster richColors/>
+      <Toaster richColors />
     </div>
   );
 };

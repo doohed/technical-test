@@ -4,6 +4,7 @@ import { createContact } from '../api/contactsApi.js';
 import { Toaster, toast } from 'sonner';
 import { Typography, Alert } from "@mui/material";
 import ContactForm from '../components/ContactForm';
+import Navbar from '../components/Navbar.jsx';
 
 const CreateContactPage = () => {
   const [formData, setFormData] = useState({
@@ -56,16 +57,58 @@ const CreateContactPage = () => {
     }));
   };
 
+  const addAddress = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      addresses: [...prevState.addresses, {
+        street: '',
+        number: '',
+        suburb: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        country: '',
+        type: ''
+      }]
+    }));
+  };
+
+  const removeLastAddress = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      addresses: prevState.addresses.slice(0, -1)
+    }));
+  };
+
+  const addPhone = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      phones: [...prevState.phones, {
+        phoneNumber: '',
+        type: ''
+      }]
+    }));
+  };
+
+  const removeLastPhone = () => {
+    setFormData(prevState => ({
+      ...prevState,
+      phones: prevState.phones.slice(0, -1)
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let errors = {};
 
+    // Check for empty fields in formData
     for (let key in formData) {
       if (!formData[key] && key !== 'addresses' && key !== 'phones') {
         errors[key] = "This field is required";
       }
     }
 
+    // Check for empty fields in addresses
     formData.addresses.forEach((address, index) => {
       for (let key in address) {
         if (!address[key]) {
@@ -74,6 +117,7 @@ const CreateContactPage = () => {
       }
     });
 
+    // Check for empty fields in phones
     formData.phones.forEach((phone, index) => {
       for (let key in phone) {
         if (!phone[key]) {
@@ -81,6 +125,7 @@ const CreateContactPage = () => {
         }
       }
     });
+
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
@@ -93,28 +138,8 @@ const CreateContactPage = () => {
       };
 
       try {
-        await createContact(JSON.stringify(postData), token);
+        const contactsResult = await createContact(JSON.stringify(postData), token);
         toast.success('Contact created successfully');
-        setFormData({
-          addresses: [{
-            street: '',
-            number: '',
-            suburb: '',
-            city: '',
-            state: '',
-            postalCode: '',
-            country: '',
-            type: ''
-          }],
-          name: '',
-          lastName: '',
-          email: '',
-          phones: [{
-            phoneNumber: '',
-            type: ''
-          }]
-        });
-        setFormErrors({});
       } catch (error) {
         console.error("Error creating contact:", error);
         toast.error('Failed to create contact');
@@ -128,6 +153,7 @@ const CreateContactPage = () => {
 
   return (
     <div>
+      <Navbar/>
       <Typography variant="h4" gutterBottom>
         Create Contact
       </Typography>
@@ -138,8 +164,12 @@ const CreateContactPage = () => {
         handleAddressChange={handleAddressChange}
         handlePhoneChange={handlePhoneChange}
         handleSubmit={handleSubmit}
+        addAddress={addAddress}
+        removeLastAddress={removeLastAddress}
+        addPhone={addPhone}
+        removeLastPhone={removeLastPhone}
       />
-      <Toaster richColors/>
+      <Toaster richColors />
     </div>
   );
 };
