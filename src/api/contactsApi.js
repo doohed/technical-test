@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
 
 
 const API_URL='https://nestjs-technical-test-production.up.railway.app/api';
