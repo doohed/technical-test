@@ -4,7 +4,7 @@ import { Button, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const columns = [
-  { field: 'name', headerName: 'Name', width: 100 },
+  { field: 'name', headerName: 'Name', width: 200 },
   { field: 'lastName', headerName: 'Last Name', width: 200 },
   { field: 'email', headerName: 'Email', width: 300 },
   {
@@ -44,7 +44,7 @@ const ContactDetails = ({ contacts }) => {
   }));
 
   return (
-    <div style={{ height: '70vh', width: '70vw' }}>
+    <div style={{ height: '70vh', width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getContact } from '../api/contactsApi.js';
+import { getContact, updateContact } from '../api/contactsApi.js';
 import { Toaster, toast } from 'sonner';
 import {
   Button,
@@ -28,7 +29,7 @@ const EditContact = () => {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const contactResult = await getContact(params.id);
+        const contactResult = await getContact(token, params.id);
         setFormData({
           name: contactResult.name,
           lastName: contactResult.lastName,
@@ -36,6 +37,7 @@ const EditContact = () => {
           addresses: contactResult.addresses,
           phones: contactResult.phones
         });
+        console.log(contactResult);
       } catch (error) {
         console.error("Error fetching contacts:", error);
         setError("Failed to load contact data");
@@ -77,13 +79,13 @@ const EditContact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let errors = {};
 
     // Check for empty fields in formData
     for (let key in formData) {
-      if (!formData[key]) {
+      if (!formData[key] && key !== 'addresses' && key !== 'phones') {
         errors[key] = "This field is required";
       }
     }
@@ -118,8 +120,15 @@ const EditContact = () => {
       };
 
       console.log("Form submitted successfully", postData);
-      toast.success('Data submited')
-      // Add your form submission logic here, e.g., calling an API to save data
+
+      try {
+        const contactsResult = await updateContact(params.id, postData, token);
+        console.log(contactsResult);
+        toast.success('Data submitted');
+      } catch (error) {
+        console.error("Error updating contact:", error);
+        toast.error('Failed to submit data');
+      }
     }
   };
 
@@ -296,13 +305,13 @@ const EditContact = () => {
           </Box>
         ))}
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          Save
         </Button>
-        <Toaster richColors position="bottom-center"/>
-
       </Box>
+      <Toaster />
     </div>
   );
 };
 
 export default EditContact;
+

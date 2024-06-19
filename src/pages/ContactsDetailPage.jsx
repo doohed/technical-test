@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ContactDetails from "../components/ContactDetails.jsx"
-import { useDispatch, useSelector } from "react-redux";
 import { getContacts } from "../api/contactsApi.js";
 import {CircularProgress} from "@mui/material";
 import SignOut from '../components/SignOut.jsx';
+import AddContact from '../components/AddContact.jsx'
 const ContactsDetailPage = () => {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ const ContactsDetailPage = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const contactsResult = await getContacts();
+        const contactsResult = await getContacts(token);
         setContacts(contactsResult);
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -40,6 +40,7 @@ const ContactsDetailPage = () => {
       <SignOut/>
       <h1>Contact Info</h1>
       <ContactDetails contacts={contacts}/>
+      <AddContact/>
     </div>
   );
 };
