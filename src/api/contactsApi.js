@@ -34,3 +34,18 @@ export const getContact = async (id) => {
   });
   return response.data;
 };
+
+export const updateContact = async (contact) => {
+  const TOKEN=window.localStorage.getItem("token");
+  if (TOKEN === ''){
+    return;
+  }
+  const response = await axios.patch(proxyUrl + `${API_URL}/contacts/${id}`, {
+    headers: {
+      'accept': 'application/json',
+      'Authorization': `Bearer ${TOKEN}`,
+      'x-cors-api-key': xcorsKey,
+    }
+  });
+  return response.data;
+};

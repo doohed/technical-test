@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getContact } from '../api/contactsApi.js';
+import { Toaster, toast } from 'sonner';
 import {
   Button,
   Typography,
@@ -117,6 +118,7 @@ const EditContact = () => {
       };
 
       console.log("Form submitted successfully", postData);
+      toast.success('Data submited')
       // Add your form submission logic here, e.g., calling an API to save data
     }
   };
@@ -296,6 +298,8 @@ const EditContact = () => {
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
+        <Toaster richColors position="bottom-center"/>
+
       </Box>
     </div>
   );
