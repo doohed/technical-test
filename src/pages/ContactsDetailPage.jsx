@@ -22,7 +22,7 @@ const ContactsDetailPage = () => {
         const contactsResult = await getContacts(token);
         setContacts(contactsResult);
       } catch (error) {
-        console.error("Error fetching contacts:", error);
+        console.error("Error al recuperar contactos:", error);
       } finally {
         setLoading(false);
       }
@@ -38,7 +38,7 @@ const ContactsDetailPage = () => {
   };
 
   if (!token) {
-    return <div>Please log in...</div>;
+    return <div>Porfavor inicie sesión...</div>;
   }
 
   if (loading) {
@@ -60,7 +60,7 @@ const ContactsDetailPage = () => {
     <div>
       <div className="mt-[7vh]">
         <TextField
-          label="Search"
+          label="Buscar"
           variant="standard"
           fullWidth
           value={search}

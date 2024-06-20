@@ -28,7 +28,7 @@ const ContactForm = ({
         <div>
           <TextField
             id="name"
-            label="Name"
+            label="Nombre"
             name="name"
             variant="filled"
             value={formData.name}
@@ -38,7 +38,7 @@ const ContactForm = ({
           />
           <TextField
             id="lastName"
-            label="Last Name"
+            label="Apellidos"
             name="lastName"
             variant="filled"
             value={formData.lastName}
@@ -48,7 +48,7 @@ const ContactForm = ({
           />
           <TextField
             id="email"
-            label="Email"
+            label="Correo"
             type="email"
             name="email"
             variant="filled"
@@ -60,7 +60,7 @@ const ContactForm = ({
         </div>
         <div className="border-t-2 border-gray-200 mt-8 pt-8">
           <Typography variant="h6" gutterBottom>
-            Addresses
+            Direcciónes
           </Typography>
           {formData.addresses.map((address, index) => (
             <AddressField
@@ -77,7 +77,7 @@ const ContactForm = ({
             variant="contained"
             color="primary"
           >
-            Add{" "}
+            Agregar
           </Button>
           <Button
             style={{ width: 90, margin: 5 }}
@@ -85,12 +85,12 @@ const ContactForm = ({
             variant="contained"
             color="error"
           >
-            Remove
+            Remover
           </Button>
         </div>
         <div className="border-t-2 border-b-2 border-gray-200 mt-8 pt-8 mb-8 pb-8">
           <Typography variant="h6" gutterBottom>
-            Phones
+            Números de Telefono
           </Typography>
           {formData.phones.map((phone, index) => (
             <PhoneField
@@ -108,7 +108,7 @@ const ContactForm = ({
             color="primary"
             className="mr-2"
           >
-            Add
+            Agregar
           </Button>
           <Button
             style={{ width: 90, margin: 5 }}
@@ -116,7 +116,7 @@ const ContactForm = ({
             variant="contained"
             color="error"
           >
-            Remove{" "}
+            Remover
           </Button>
           <br />
         </div>
@@ -127,7 +127,7 @@ const ContactForm = ({
           color="primary"
           className="mt-2"
         >
-          Save
+          Guardar
         </Button>
       </Box>
     </div>

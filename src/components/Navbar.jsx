@@ -54,7 +54,7 @@ const Navbar = () => {
               component="div"
             >
               <HomeIcon className="mb-[5px] mr-2" />
-              PKT1 Contacts
+              PKT1 Contactos
             </Typography>
           </Toolbar>
         </AppBar>
@@ -68,7 +68,7 @@ const Navbar = () => {
           }}
         >
           <MenuItem onClick={handleLogOut}>
-            Logout
+            Cerrar sesión
             <LogoutIcon className="ml-2"/>
           </MenuItem>
         </Menu>

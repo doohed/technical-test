@@ -2,7 +2,18 @@ import axios from "axios";
 
 const API_URL = "https://nestjs-technical-test-production.up.railway.app/api";
 const proxyUrl = "https://cors.bridged.cc/";
-const xcorsKey = "temp_1230e9794f355da55356695ea15c209e";
+const xcorsKey = "temp_06fe6dae8200ec6e7a9a25e02f2a31bd";
+
+export const signIn = async (data) => {
+  const response = await axios.post(proxyUrl + `${API_URL}/auth/login`, data, {
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "x-cors-api-key": xcorsKey,
+    },
+  });
+  return response.data;
+};
 
 export const getContacts = async (TOKEN) => {
   const response = await axios.get(proxyUrl + `${API_URL}/contacts`, {

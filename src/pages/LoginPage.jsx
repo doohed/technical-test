@@ -1,43 +1,52 @@
 import { useState } from "react";
-import axios from "axios";
 import LoginIcon from "@mui/icons-material/Login";
-import { Box, Button, TextField } from "@mui/material";
-
-const proxyUrl = "https://cors.bridged.cc/";
+import { Box, Button, TextField, Alert } from "@mui/material";
+import { signIn } from "../api/contactsApi.js";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userNameError, setUserNameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [buttonLabel, setButtonLabel] = useState("Iniciar sesión");
 
   const handleLogin = async () => {
+    // Reseteo de errores
+    setUserNameError(false);
+    setPasswordError(false);
+    setErrorMessage("");
+
     if (userName === "" || password === "") {
-      console.log("no");
+      if (userName === "") setUserNameError(true);
+      if (password === "") setPasswordError(true);
+      setErrorMessage("Los dos espacios son requeridos.");
       return;
     }
+
+    const data = {
+      userName: userName,
+      password: password,
+    };
+
+    setIsSigningIn(true);
+    setButtonLabel("Iniciando sesión");
+
     try {
-      const response = await axios.post(
-        proxyUrl +
-          "https://nestjs-technical-test-production.up.railway.app/api/auth/login",
-        {
-          userName: userName,
-          password: password,
-        },
-        {
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-            "x-cors-api-key": "temp_1230e9794f355da55356695ea15c209e",
-          },
-        }
-      );
-      console.log(response.data.access_token);
-      window.localStorage.setItem("token", response.data.access_token);
+      const token = await signIn(JSON.stringify(data));
+      //se guarda localmente al variabel de inicio de sesion
+      //y el token para mantener la sesion una vez el navegador fue cerrado
+      window.localStorage.setItem("token", token.access_token);
       window.localStorage.setItem("isLoggedIn", true);
       window.location.reload();
     } catch (error) {
-      console.error("Error during login:", error);
+      setErrorMessage("Usuario o Contraseña incorrectos.");
+      setIsSigningIn(false);
+      setButtonLabel("Iniciar sesión");
     }
   };
+
   return (
     <div className="">
       <Box
@@ -49,31 +58,46 @@ const Login = () => {
         autoComplete="off"
       >
         <TextField
-          id="standard-basic"
-          label="Username"
+          id="username"
+          label="Usuario"
           variant="standard"
           type="text"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
+          error={userNameError}
+          helperText={userNameError ? "Usuario requerido." : ""}
         />
         <br />
         <TextField
-          id="standard-basic"
-          label="Password"
+          id="password"
+          label="Contraseña"
           variant="standard"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          error={passwordError}
+          helperText={passwordError ? "Contraseña requerida." : ""}
         />
         <br />
         <br />
       </Box>
-      <Button variant="outlined" size="medium" onClick={handleLogin}>
-        <p className="mt-[3px]">Login</p>
+      <Button
+        variant="outlined"
+        size="medium"
+        onClick={handleLogin}
+        disabled={isSigningIn}
+      >
+        <p className="mt-[3px]">{buttonLabel}</p>
         <LoginIcon className="ml-2" />
       </Button>
+      {errorMessage && (
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {errorMessage}
+        </Alert>
+      )}
     </div>
   );
 };
 
 export default Login;
+

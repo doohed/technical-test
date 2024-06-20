@@ -2,10 +2,10 @@ import { Box, TextField, Select, MenuItem, Typography } from "@mui/material";
 
 const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
   <Box key={index} sx={{ marginBottom: 2 }}>
-    <Typography>Address {index + 1}</Typography>
+    <Typography>Dirección {index + 1}</Typography>
     <TextField
       id={`street-${index}`}
-      label="Street"
+      label="Calle"
       name="street"
       variant="filled"
       value={address.street}
@@ -15,7 +15,7 @@ const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
     />
     <TextField
       id={`number-${index}`}
-      label="Number"
+      label="Número"
       name="number"
       type="number"
       variant="filled"
@@ -26,7 +26,7 @@ const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
     />
     <TextField
       id={`suburb-${index}`}
-      label="Suburb"
+      label="Suburbio"
       name="suburb"
       variant="filled"
       value={address.suburb}
@@ -36,7 +36,7 @@ const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
     />
     <TextField
       id={`city-${index}`}
-      label="City"
+      label="Ciudad"
       name="city"
       variant="filled"
       value={address.city}
@@ -46,7 +46,7 @@ const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
     />
     <TextField
       id={`state-${index}`}
-      label="State"
+      label="Estado"
       name="state"
       variant="filled"
       value={address.state}
@@ -56,7 +56,7 @@ const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
     />
     <TextField
       id={`postalCode-${index}`}
-      label="Postal Code"
+      label="Codigo Postal"
       name="postalCode"
       type="number"
       variant="filled"
@@ -70,7 +70,7 @@ const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
         style={{ width: 195 }}
         className="mr-[20px]"
         id={`country-${index}`}
-        label="Country"
+        label="País"
         name="country"
         variant="filled"
         value={address.country}

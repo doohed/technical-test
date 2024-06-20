@@ -138,27 +138,27 @@ const EditContactPage = () => {
     e.preventDefault();
     let errors = {};
 
-    // Check for empty fields in formData
+    // Revisar espacios vacios en formData
     for (let key in formData) {
       if (!formData[key] && key !== "addresses" && key !== "phones") {
-        errors[key] = "This field is required";
+        errors[key] = "Espacio requerido";
       }
     }
 
-    // Check for empty fields in addresses
+    // Revisar espacios vacios en adresses 
     formData.addresses.forEach((address, index) => {
       for (let key in address) {
         if (!address[key]) {
-          errors[`address-${index}-${key}`] = "This field is required";
+          errors[`address-${index}-${key}`] = "Espacio requerido";
         }
       }
     });
 
-    // Check for empty fields in phones
+    // Revisar espacios vacios en phones
     formData.phones.forEach((phone, index) => {
       for (let key in phone) {
         if (!phone[key]) {
-          errors[`phone-${index}-${key}`] = "This field is required";
+          errors[`phone-${index}-${key}`] = "Espacio requerido";
         }
       }
     });
@@ -166,6 +166,7 @@ const EditContactPage = () => {
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
+      // Se prepara y se da el schema para el patch
       const postData = {
         name: formData.name,
         lastName: formData.lastName,
@@ -188,10 +189,10 @@ const EditContactPage = () => {
           JSON.stringify(postData),
           token
         );
-        toast.success("Data submitted");
+        toast.success("Contacto actualizado");
       } catch (error) {
-        console.error("Error updating contact:", error);
-        toast.error("Failed to submit data");
+        console.error("Error actualizando contacto:", error);
+        toast.error("No se pudo actualizar contacto");
       }
     }
   };
@@ -199,7 +200,7 @@ const EditContactPage = () => {
   const handleDelete = async () => {
     try {
       await deleteContact(token, params.id);
-      toast.success("Contact deleted");
+      toast.success("Contacto borrado");
       navigate("/");
     } catch (error) {
       navigate("/");
@@ -220,7 +221,7 @@ const EditContactPage = () => {
   };
 
   if (!token) {
-    return <Alert severity="warning">Please log in...</Alert>;
+    return <Alert severity="warning">Favor de iniciar sesion...</Alert>;
   }
 
   if (loading) {
@@ -234,7 +235,7 @@ const EditContactPage = () => {
   return (
     <div className="mt-[10vh] mb-[10vh]">
       <Typography variant="h4" gutterBottom>
-        Edit Contact
+        Editar Contacto
       </Typography>
       <ContactForm
         formData={formData}
@@ -255,7 +256,7 @@ const EditContactPage = () => {
         color="error"
         className="mt-2"
       >
-        Delete Contact
+        Borrar contacto
       </Button>
 
       <Dialog
@@ -264,19 +265,18 @@ const EditContactPage = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Confirm Delete</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Confirmar</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this contact? This action cannot be
-            undone.
+            ¿Seguro de borrar este contacto?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDeleteDialog} color="primary">
-            Cancel
+            Cancelar
           </Button>
           <Button onClick={confirmDelete} color="error" autoFocus>
-            Delete
+            Borrar
           </Button>
         </DialogActions>
       </Dialog>

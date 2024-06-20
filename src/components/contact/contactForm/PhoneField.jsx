@@ -2,12 +2,12 @@ import { Box, TextField, Select, MenuItem, Typography } from "@mui/material";
 
 const PhoneField = ({ index, phone, formErrors, handlePhoneChange }) => (
   <Box key={index} sx={{ marginBottom: 2 }}>
-    <Typography>Phone {index + 1}</Typography>
+    <Typography>Número {index + 1}</Typography>
     <div className="mr-[10px]">
       <TextField
         style={{ width: 195 }}
         id={`phoneNumber-${index}`}
-        label="Phone Number"
+        label="Número de Telefono"
         name="phoneNumber"
         variant="filled"
         type="number"

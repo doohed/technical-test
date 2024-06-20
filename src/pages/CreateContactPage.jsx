@@ -111,33 +111,33 @@ const CreateContactPage = () => {
     e.preventDefault();
     let errors = {};
 
-    // Check for empty fields in formData
+    // Revisar espacios vacios en formData
     for (let key in formData) {
       if (!formData[key] && key !== "addresses" && key !== "phones") {
-        errors[key] = "This field is required";
+        errors[key] = "Espacio requerido";
       }
     }
 
-    // Check for empty fields in addresses
+    // Revisar espacios vacios en addresses
     formData.addresses.forEach((address, index) => {
       for (let key in address) {
         if (!address[key]) {
-          errors[`address-${index}-${key}`] = "This field is required";
+          errors[`address-${index}-${key}`] = "Espacio requerido";
         }
       }
     });
 
-    // Check for empty fields in phones
+    // Revisar espacios vacios en phones
     formData.phones.forEach((phone, index) => {
       for (let key in phone) {
         if (!phone[key]) {
-          errors[`phone-${index}-${key}`] = "This field is required";
+          errors[`phone-${index}-${key}`] = "Espacio requerido";
         }
       }
     });
 
     setFormErrors(errors);
-
+    // Se prepara y se da el schema para el post
     if (Object.keys(errors).length === 0) {
       const postData = {
         name: formData.name,
@@ -152,23 +152,23 @@ const CreateContactPage = () => {
           JSON.stringify(postData),
           token
         );
-        toast.success("Contact created successfully");
+        toast.success("Contacto creado exitosamente");
         navigate("/");
       } catch (error) {
-        console.error("Error creating contact:", error);
-        toast.error("Failed to create contact");
+        console.error("Error creando contact:", error);
+        toast.error("No se pudo crear contacto");
       }
     }
   };
 
   if (!token) {
-    return <Alert severity="warning">Please log in...</Alert>;
+    return <Alert severity="warning">Porfavor inicie sesión...</Alert>;
   }
 
   return (
     <div className="mt-[10vh] mb-[10vh]">
       <Typography variant="h4" gutterBottom>
-        Create Contact
+        Crear Contacto
       </Typography>
       <ContactForm
         formData={formData}

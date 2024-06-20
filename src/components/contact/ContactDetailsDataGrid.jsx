@@ -4,14 +4,14 @@ import { Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const columns = [
-  { field: "name", headerName: "Name", width: 200 },
-  { field: "lastName", headerName: "Last Name", width: 200 },
-  { field: "email", headerName: "Email", width: 200 },
-  { field: "phone", headerName: "Number", width: 150 },
+  { field: "name", headerName: "Nombre", width: 200 },
+  { field: "lastName", headerName: "Apellidos", width: 200 },
+  { field: "email", headerName: "Correo", width: 200 },
+  { field: "phone", headerName: "Numero", width: 150 },
   { field: "id", headerName: "ID", width: 250 },
   {
     field: "actions",
-    headerName: "Actions",
+    headerName: "",
     width: 100,
     renderCell: (params) => (
       <Stack className="m-[6px]" direction="row" spacing={1}>
@@ -20,7 +20,7 @@ const columns = [
           color="primary"
           onClick={() => params.row.handleEdit(params.row.id)}
         >
-          Edit
+          Editar
         </Button>
       </Stack>
     ),
