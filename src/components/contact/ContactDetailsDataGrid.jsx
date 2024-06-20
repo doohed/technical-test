@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+//Decidi unsar un datagrid de MaterialUI por su simplesa y facilidad
 const columns = [
   { field: "name", headerName: "Nombre", width: 200 },
   { field: "lastName", headerName: "Apellidos", width: 200 },

@@ -9,7 +9,7 @@ import {
   Button,
   Stack
 } from '@mui/material';
-
+//Uso de datalist para la UI responsive
 const ContactDetailsList = ({ contacts, handleEdit }) => {
  
 

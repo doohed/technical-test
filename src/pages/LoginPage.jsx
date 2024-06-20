@@ -1,6 +1,6 @@
 import { useState } from "react";
 import LoginIcon from "@mui/icons-material/Login";
-import { Box, Button, TextField, Alert } from "@mui/material";
+import { Box, Button, TextField, Alert, Typography } from "@mui/material";
 import { signIn } from "../api/contactsApi.js";
 
 const Login = () => {
@@ -48,8 +48,12 @@ const Login = () => {
   };
 
   return (
-    <div className="">
+    <div className="border rounded p-8  border-[#81c784]">
+      <Typography className="text-[#388e3c]" variant="h4" gutterBottom>
+        PKT1 Contactos
+      </Typography>
       <Box
+        className="mt-[30px]"
         component="form"
         sx={{
           "& > :not(style)": { m: 1, width: "30ch" },
@@ -63,7 +67,10 @@ const Login = () => {
           variant="standard"
           type="text"
           value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={(e) => {
+            setUserName(e.target.value);
+            if (userNameError) setUserNameError(false);
+          }}
           error={userNameError}
           helperText={userNameError ? "Usuario requerido." : ""}
         />
@@ -74,7 +81,10 @@ const Login = () => {
           variant="standard"
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            if (passwordError) setPasswordError(false);
+          }}
           error={passwordError}
           helperText={passwordError ? "Contraseña requerida." : ""}
         />
@@ -100,4 +110,3 @@ const Login = () => {
 };
 
 export default Login;
-

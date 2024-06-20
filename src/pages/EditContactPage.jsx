@@ -37,6 +37,7 @@ const EditContactPage = () => {
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
+    //para renderizar los contactos en la 1er carga de la pagina
     const fetchContact = async () => {
       try {
         const contactResult = await getContact(token, params.id);
@@ -60,6 +61,8 @@ const EditContactPage = () => {
     }
   }, [token, params.id]);
 
+  //Cambiar datos en especifico del Object
+  //Sin afectar los demas
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
