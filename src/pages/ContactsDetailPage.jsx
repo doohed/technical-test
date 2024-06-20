@@ -5,7 +5,6 @@ import ContactDetailsDataGrid from "../components/contact/ContactDetailsDataGrid
 import ContactDetailsList from "../components/contact/ContactDetailsList.jsx";
 import { getContacts } from "../api/contactsApi.js";
 import AddContact from "../components/contact/AddContact.jsx";
-import Navbar from "../components/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 
 const ContactsDetailPage = () => {
@@ -59,7 +58,6 @@ const ContactsDetailPage = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="mt-[7vh]">
         <TextField
           label="Search"

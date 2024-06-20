@@ -3,7 +3,6 @@ import { createContact } from "../api/contactsApi.js";
 import { Toaster, toast } from "sonner";
 import { Typography, Alert } from "@mui/material";
 import ContactForm from "../components/contact/contactForm/ContactForm.jsx";
-import Navbar from "../components/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 
 const CreateContactPage = () => {
@@ -168,7 +167,6 @@ const CreateContactPage = () => {
 
   return (
     <div className="mt-[10vh] mb-[10vh]">
-      <Navbar />
       <Typography variant="h4" gutterBottom>
         Create Contact
       </Typography>

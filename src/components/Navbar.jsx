@@ -33,7 +33,7 @@ const Navbar = () => {
     navigate("/");
   };
   return (
-    <div className="fixed right-[0px] w-[100vw] top-[0px] z-10">
+    <div className="fixed left-[0px] w-[100vw] top-[0px] z-10">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar variant="dense">

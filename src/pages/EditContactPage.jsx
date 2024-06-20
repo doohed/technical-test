@@ -18,7 +18,6 @@ import {
   DialogTitle,
 } from "@mui/material";
 import ContactForm from "../components/contact/contactForm/ContactForm.jsx";
-import Navbar from "../components/Navbar.jsx";
 import { useNavigate } from "react-router-dom";
 
 const EditContactPage = () => {
@@ -234,7 +233,6 @@ const EditContactPage = () => {
 
   return (
     <div className="mt-[10vh] mb-[10vh]">
-      <Navbar />
       <Typography variant="h4" gutterBottom>
         Edit Contact
       </Typography>
