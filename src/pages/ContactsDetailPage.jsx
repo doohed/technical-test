@@ -58,7 +58,7 @@ const ContactsDetailPage = () => {
 
   return (
     <div>
-      <div className="mt-[7vh]">
+      <div className="mt-[7vh] ">
         <TextField
           label="Buscar"
           variant="standard"
