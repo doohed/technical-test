@@ -1,13 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import {
-  styled,
-  Box,
-  Button,
-  Stack,
-  TextField,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import LoginIcon from "@mui/icons-material/Login";
+import { Box, Button, TextField } from "@mui/material";
 
 
 const proxyUrl = "https://cors.bridged.cc/";
@@ -46,14 +40,14 @@ const Login = () => {
     }
   };
   return (
-    <>
+    <div className="">
       <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '30ch' },
-      }}
-      noValidate
-      autoComplete="off"
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "30ch" },
+        }}
+        noValidate
+        autoComplete="off"
       >
         <TextField
           id="standard-basic"
@@ -74,12 +68,12 @@ const Login = () => {
         />
         <br />
         <br />
-        </Box>
-      <Button  variant="outlined" size="medium" onClick={handleLogin}>
-          Login
+      </Box>
+      <Button variant="outlined" size="medium" onClick={handleLogin}>
+        <LoginIcon className="mr-2" />
+        Login
       </Button>
-
-    </>
+    </div>
   );
 };
 

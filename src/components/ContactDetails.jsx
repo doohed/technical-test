@@ -1,15 +1,14 @@
-import React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { Button, Stack } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { DataGrid } from "@mui/x-data-grid";
+import { Button, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'lastName', headerName: 'Last Name', width: 200 },
-  { field: 'email', headerName: 'Email', width: 300 },
+  { field: "name", headerName: "Name", width: 200 },
+  { field: "lastName", headerName: "Last Name", width: 200 },
+  { field: "email", headerName: "Email", width: 200 },
   {
-    field: 'actions',
-    headerName: 'Actions',
+    field: "actions",
+    headerName: "Actions",
     width: 200,
     renderCell: (params) => (
       <Stack className="m-[6px]" direction="row" spacing={1}>
@@ -20,8 +19,8 @@ const columns = [
         >
           Edit
         </Button>
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           color="error"
           onClick={() => params.row.handleDelete(params.row.id)}
         >
@@ -41,8 +40,7 @@ const ContactDetails = ({ contacts }) => {
 
   const handleDelete = (id) => {
     const token = window.localStorage.getItem("token");
-    
-  }
+  };
 
   const rows = contacts.map((contact) => ({
     id: contact.id,
@@ -54,7 +52,7 @@ const ContactDetails = ({ contacts }) => {
   }));
 
   return (
-    <div style={{ height: '70vh', width: '80vw' }}>
+    <div>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -66,4 +64,3 @@ const ContactDetails = ({ contacts }) => {
 };
 
 export default ContactDetails;
-

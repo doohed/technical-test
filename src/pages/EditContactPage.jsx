@@ -1,20 +1,19 @@
-
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getContact, updateContact } from '../api/contactsApi.js';
-import { Toaster, toast } from 'sonner';
+import { getContact, updateContact } from "../api/contactsApi.js";
+import { Toaster, toast } from "sonner";
 import { Typography, Alert, CircularProgress } from "@mui/material";
-import ContactForm from '../components/ContactForm';
-import Navbar from '../components/Navbar.jsx';
+import ContactForm from "../components/ContactForm";
+import Navbar from "../components/Navbar.jsx";
 
 const EditContactPage = () => {
   const params = useParams();
   const [formData, setFormData] = useState({
     addresses: [],
-    name: '',
-    lastName: '',
-    email: '',
-    phones: []
+    name: "",
+    lastName: "",
+    email: "",
+    phones: [],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,7 +29,7 @@ const EditContactPage = () => {
           lastName: contactResult.lastName,
           email: contactResult.email,
           addresses: contactResult.addresses,
-          phones: contactResult.phones
+          phones: contactResult.phones,
         });
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -47,7 +46,7 @@ const EditContactPage = () => {
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -55,61 +54,67 @@ const EditContactPage = () => {
 
   const handleAddressChange = (index, e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       addresses: prevState.addresses.map((address, idx) =>
         idx === index ? { ...address, [name]: value } : address
-      )
+      ),
     }));
   };
 
   const handlePhoneChange = (index, e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       phones: prevState.phones.map((phone, idx) =>
         idx === index ? { ...phone, [name]: value } : phone
-      )
+      ),
     }));
   };
 
   const addAddress = () => {
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      addresses: [...prevState.addresses, {
-        street: '',
-        number: '',
-        suburb: '',
-        city: '',
-        state: '',
-        postalCode: '',
-        country: '',
-        type: ''
-      }]
+      addresses: [
+        ...prevState.addresses,
+        {
+          street: "",
+          number: "",
+          suburb: "",
+          city: "",
+          state: "",
+          postalCode: "",
+          country: "",
+          type: "",
+        },
+      ],
     }));
   };
 
   const removeLastAddress = () => {
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      addresses: prevState.addresses.slice(0, -1)
+      addresses: prevState.addresses.slice(0, -1),
     }));
   };
 
   const addPhone = () => {
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      phones: [...prevState.phones, {
-        phoneNumber: '',
-        type: ''
-      }]
+      phones: [
+        ...prevState.phones,
+        {
+          phoneNumber: "",
+          type: "",
+        },
+      ],
     }));
   };
 
   const removeLastPhone = () => {
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      phones: prevState.phones.slice(0, -1)
+      phones: prevState.phones.slice(0, -1),
     }));
   };
 
@@ -119,7 +124,7 @@ const EditContactPage = () => {
 
     // Check for empty fields in formData
     for (let key in formData) {
-      if (!formData[key] && key !== 'addresses' && key !== 'phones') {
+      if (!formData[key] && key !== "addresses" && key !== "phones") {
         errors[key] = "This field is required";
       }
     }
@@ -150,24 +155,27 @@ const EditContactPage = () => {
         lastName: formData.lastName,
         email: formData.email,
         addresses: formData.addresses,
-        phones: formData.phones
+        phones: formData.phones,
       };
-      postData.addresses = postData.addresses.map(address => {
-          const { id, ...rest } = address;
+      postData.addresses = postData.addresses.map((address) => {
+        const { id, ...rest } = address;
         return rest;
       });
-      postData.phones = postData.phones.map(phone => {
-          const { id, ...rest } = phone;
+      postData.phones = postData.phones.map((phone) => {
+        const { id, ...rest } = phone;
         return rest;
       });
-
 
       try {
-        const contactsResult = await updateContact(params.id, JSON.stringify(postData), token);
-        toast.success('Data submitted');
+        const contactsResult = await updateContact(
+          params.id,
+          JSON.stringify(postData),
+          token
+        );
+        toast.success("Data submitted");
       } catch (error) {
         console.error("Error updating contact:", error);
-        toast.error('Failed to submit data');
+        toast.error("Failed to submit data");
       }
     }
   };
@@ -185,8 +193,8 @@ const EditContactPage = () => {
   }
 
   return (
-    <div>
-      <Navbar/>
+    <div className="mt-[50px]">
+      <Navbar />
       <Typography variant="h4" gutterBottom>
         Edit Contact
       </Typography>
@@ -208,4 +216,3 @@ const EditContactPage = () => {
 };
 
 export default EditContactPage;
-

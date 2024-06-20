@@ -1,11 +1,11 @@
-import React from 'react'
-import ContactsDetailPage from './ContactsDetailPage.jsx'
+import React from "react";
+import ContactsDetailPage from "./ContactsDetailPage.jsx";
 const HomePage = () => {
   return (
     <div>
-      <ContactsDetailPage/>
+      <ContactsDetailPage />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
