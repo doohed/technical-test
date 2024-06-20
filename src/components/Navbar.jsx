@@ -68,8 +68,8 @@ const Navbar = () => {
           }}
         >
           <MenuItem onClick={handleLogOut}>
-            <LogoutIcon />
             Logout
+            <LogoutIcon />
           </MenuItem>
         </Menu>
       </Box>

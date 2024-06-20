@@ -61,7 +61,6 @@ const ContactsDetailPage = () => {
     <div>
       <Navbar />
       <div className="mt-[7vh]">
-        <h1>Contact Info</h1>
         <TextField
           label="Search"
           variant="standard"

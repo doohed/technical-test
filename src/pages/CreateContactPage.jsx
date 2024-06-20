@@ -4,8 +4,10 @@ import { Toaster, toast } from "sonner";
 import { Typography, Alert } from "@mui/material";
 import ContactForm from "../components/contact/contactForm/ContactForm.jsx";
 import Navbar from "../components/Navbar.jsx";
+import { useNavigate } from "react-router-dom";
 
 const CreateContactPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     addresses: [
       {
@@ -152,6 +154,7 @@ const CreateContactPage = () => {
           token
         );
         toast.success("Contact created successfully");
+        navigate("/");
       } catch (error) {
         console.error("Error creating contact:", error);
         toast.error("Failed to create contact");

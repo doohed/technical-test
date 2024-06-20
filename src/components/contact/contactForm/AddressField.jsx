@@ -2,7 +2,7 @@ import { Box, TextField, Select, MenuItem, Typography } from "@mui/material";
 
 const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
   <Box key={index} sx={{ marginBottom: 2 }}>
-    <Typography>address {index + 1}</Typography>
+    <Typography>Address {index + 1}</Typography>
     <TextField
       id={`street-${index}`}
       label="Street"

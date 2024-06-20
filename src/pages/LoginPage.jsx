@@ -69,8 +69,8 @@ const Login = () => {
         <br />
       </Box>
       <Button variant="outlined" size="medium" onClick={handleLogin}>
-        <LoginIcon className="mr-2" />
-        Login
+        <p className="mt-[3px]">Login</p>
+        <LoginIcon className="ml-2" />
       </Button>
     </div>
   );

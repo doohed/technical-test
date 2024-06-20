@@ -1,12 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getContact, updateContact } from "../api/contactsApi.js";
+import {
+  getContact,
+  updateContact,
+  deleteContact,
+} from "../api/contactsApi.js";
 import { Toaster, toast } from "sonner";
-import { Typography, Alert, CircularProgress, Button } from "@mui/material";
+import {
+  Typography,
+  Alert,
+  CircularProgress,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import ContactForm from "../components/contact/contactForm/ContactForm.jsx";
 import Navbar from "../components/Navbar.jsx";
+import { useNavigate } from "react-router-dom";
 
 const EditContactPage = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const [formData, setFormData] = useState({
     addresses: [],
@@ -18,6 +34,7 @@ const EditContactPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [formErrors, setFormErrors] = useState({});
+  const [openDialog, setOpenDialog] = useState(false);
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
@@ -180,6 +197,29 @@ const EditContactPage = () => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await deleteContact(token, params.id);
+      toast.success("Contact deleted");
+      navigate("/");
+    } catch (error) {
+      navigate("/");
+    }
+  };
+
+  const openDeleteDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const closeDeleteDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const confirmDelete = async () => {
+    closeDeleteDialog();
+    await handleDelete();
+  };
+
   if (!token) {
     return <Alert severity="warning">Please log in...</Alert>;
   }
@@ -211,6 +251,7 @@ const EditContactPage = () => {
         removeLastPhone={removeLastPhone}
       />
       <Button
+        onClick={openDeleteDialog}
         style={{ width: 160, margin: 10 }}
         variant="contained"
         color="error"
@@ -218,6 +259,29 @@ const EditContactPage = () => {
       >
         Delete Contact
       </Button>
+
+      <Dialog
+        open={openDialog}
+        onClose={closeDeleteDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirm Delete</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this contact? This action cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDeleteDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={confirmDelete} color="error" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Toaster richColors />
     </div>
