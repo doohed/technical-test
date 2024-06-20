@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
-import ContactDetails from "../components/ContactDetails.jsx";
+import { CircularProgress, useMediaQuery, TextField } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import ContactDetailsDataGrid from "../components/contact/ContactDetailsDataGrid.jsx";
+import ContactDetailsList from "../components/contact/ContactDetailsList.jsx";
 import { getContacts } from "../api/contactsApi.js";
-import { CircularProgress } from "@mui/material";
-import AddContact from "../components/AddContact.jsx";
+import AddContact from "../components/contact/AddContact.jsx";
 import Navbar from "../components/Navbar.jsx";
+import { useNavigate } from "react-router-dom";
+
 const ContactsDetailPage = () => {
+  const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
   const token = window.localStorage.getItem("token");
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -26,6 +34,10 @@ const ContactsDetailPage = () => {
     }
   }, [token]);
 
+  const handleEdit = (id) => {
+    navigate(`/contact/edit/${id}`);
+  };
+
   if (!token) {
     return <div>Please log in...</div>;
   }
@@ -33,11 +45,43 @@ const ContactsDetailPage = () => {
   if (loading) {
     return <CircularProgress />;
   }
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredContacts = contacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(search.toLowerCase()) ||
+      contact.lastName.toLowerCase().includes(search.toLowerCase()) ||
+      contact.email.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div>
       <Navbar />
-      <h1>Contact Info</h1>
-      <ContactDetails contacts={contacts} />
+      <div className="mt-[7vh]">
+        <h1>Contact Info</h1>
+        <TextField
+          label="Search"
+          variant="standard"
+          fullWidth
+          value={search}
+          onChange={handleSearchChange}
+          style={{ marginBottom: "20px" }}
+        />
+      </div>
+      {isLargeScreen ? (
+        <ContactDetailsDataGrid
+          contacts={filteredContacts}
+          handleEdit={handleEdit}
+        />
+      ) : (
+        <ContactDetailsList
+          contacts={filteredContacts}
+          handleEdit={handleEdit}
+        />
+      )}
       <AddContact />
     </div>
   );

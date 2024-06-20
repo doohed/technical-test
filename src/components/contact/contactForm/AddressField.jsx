@@ -65,28 +65,35 @@ const AddressField = ({ index, address, formErrors, handleAddressChange }) => (
       error={!!formErrors[`address-${index}-postalCode`]}
       helperText={formErrors[`address-${index}-postalCode`]}
     />
-    <TextField
-      id={`country-${index}`}
-      label="Country"
-      name="country"
-      variant="filled"
-      value={address.country}
-      onChange={(e) => handleAddressChange(index, e)}
-      error={!!formErrors[`address-${index}-country`]}
-      helperText={formErrors[`address-${index}-country`]}
-    />
-    <Select
-      id={`type-${index}`}
-      name="type"
-      value={address.type}
-      onChange={(e) => handleAddressChange(index, e)}
-      error={!!formErrors[`address-${index}-type`]}
-      helperText={formErrors[`address-${index}-type`]}
-    >
-      <MenuItem value="casa">Casa</MenuItem>
-      <MenuItem value="oficina">Oficina</MenuItem>
-      <MenuItem value="trabajo">Trabajo</MenuItem>
-    </Select>
+    <div className="mr-[10px]">
+      <TextField
+        style={{ width: 195 }}
+        className="mr-[20px]"
+        id={`country-${index}`}
+        label="Country"
+        name="country"
+        variant="filled"
+        value={address.country}
+        onChange={(e) => handleAddressChange(index, e)}
+        error={!!formErrors[`address-${index}-country`]}
+        helperText={formErrors[`address-${index}-country`]}
+      />
+      <Select
+        style={{ width: 100 }}
+        className="mt-[8px]"
+        id={`type-${index}`}
+        name="type"
+        variant="filled"
+        value={address.type}
+        onChange={(e) => handleAddressChange(index, e)}
+        error={!!formErrors[`address-${index}-type`]}
+        helperText={formErrors[`address-${index}-type`]}
+      >
+        <MenuItem value="casa">Casa</MenuItem>
+        <MenuItem value="oficina">Oficina</MenuItem>
+        <MenuItem value="trabajo">Trabajo</MenuItem>
+      </Select>
+    </div>
   </Box>
 );
 

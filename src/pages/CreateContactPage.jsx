@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createContact } from "../api/contactsApi.js";
 import { Toaster, toast } from "sonner";
 import { Typography, Alert } from "@mui/material";
-import ContactForm from "../components/ContactForm";
+import ContactForm from "../components/contact/contactForm/ContactForm.jsx";
 import Navbar from "../components/Navbar.jsx";
 
 const CreateContactPage = () => {
@@ -164,7 +164,7 @@ const CreateContactPage = () => {
   }
 
   return (
-    <div>
+    <div className="mt-[10vh] mb-[10vh]">
       <Navbar />
       <Typography variant="h4" gutterBottom>
         Create Contact

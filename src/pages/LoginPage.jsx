@@ -3,7 +3,6 @@ import axios from "axios";
 import LoginIcon from "@mui/icons-material/Login";
 import { Box, Button, TextField } from "@mui/material";
 
-
 const proxyUrl = "https://cors.bridged.cc/";
 
 const Login = () => {

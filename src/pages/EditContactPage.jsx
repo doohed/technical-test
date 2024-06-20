@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getContact, updateContact } from "../api/contactsApi.js";
 import { Toaster, toast } from "sonner";
-import { Typography, Alert, CircularProgress } from "@mui/material";
-import ContactForm from "../components/ContactForm";
+import { Typography, Alert, CircularProgress, Button } from "@mui/material";
+import ContactForm from "../components/contact/contactForm/ContactForm.jsx";
 import Navbar from "../components/Navbar.jsx";
 
 const EditContactPage = () => {
@@ -193,7 +193,7 @@ const EditContactPage = () => {
   }
 
   return (
-    <div className="mt-[50px]">
+    <div className="mt-[10vh] mb-[10vh]">
       <Navbar />
       <Typography variant="h4" gutterBottom>
         Edit Contact
@@ -210,6 +210,15 @@ const EditContactPage = () => {
         addPhone={addPhone}
         removeLastPhone={removeLastPhone}
       />
+      <Button
+        style={{ width: 160, margin: 10 }}
+        variant="contained"
+        color="error"
+        className="mt-2"
+      >
+        Delete Contact
+      </Button>
+
       <Toaster richColors />
     </div>
   );
