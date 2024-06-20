@@ -69,7 +69,7 @@ const Navbar = () => {
         >
           <MenuItem onClick={handleLogOut}>
             Logout
-            <LogoutIcon />
+            <LogoutIcon className="ml-2"/>
           </MenuItem>
         </Menu>
       </Box>
