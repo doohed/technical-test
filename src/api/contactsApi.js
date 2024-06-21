@@ -68,9 +68,8 @@ export const createContact = async (data, token) => {
 
 export const deleteContact = async (TOKEN, id) => {
   const response = await axios.delete(proxyUrl + `${API_URL}/contacts/${id}`, {
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
+    headers:  {
+      accept: "*/*",
       Authorization: `Bearer ${TOKEN}`,
       "x-cors-api-key": xcorsKey,
     },
