@@ -57,7 +57,7 @@ export const updateContact = async (id, contactData, token) => {
 export const createContact = async (data, token) => {
   const response = await axios.post(proxyUrl + `${API_URL}/contacts`, data, {
     headers: {
-      accept: "application/json",
+      accept: "*/*",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
       "x-cors-api-key": xcorsKey,
