@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://nestjs-technical-test-production.up.railway.app/api";
 const proxyUrl = "https://cors.bridged.cc/";
-const xcorsKey = "temp_06fe6dae8200ec6e7a9a25e02f2a31bd";
+const xcorsKey = "temp_c28e9394f02c8fb7992c1a6e990d25f1";
 
 export const signIn = async (data) => {
   const response = await axios.post(proxyUrl + `${API_URL}/auth/login`, data, {
